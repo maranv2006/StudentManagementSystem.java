@@ -1,0 +1,74 @@
+import java.util.*;
+
+class Product {
+    int productId, quantity;
+    String name;
+    double price;
+
+    void input(Scanner sc) {
+        System.out.print("Enter Product ID: ");
+        productId = sc.nextInt(); sc.nextLine();
+
+        System.out.print("Enter Name: ");
+        name = sc.nextLine();
+
+        System.out.print("Enter Quantity: ");
+        quantity = sc.nextInt();
+
+        System.out.print("Enter Price: ");
+        price = sc.nextDouble();
+    }
+
+    void display() {
+        System.out.println("--------------------------------");
+        System.out.println(productId+" "+name+" "+quantity+" "+price);
+    }
+}
+
+public class InventoryManagementSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Product> list = new ArrayList<>();
+        int choice;
+
+        do {
+            System.out.println("\n1.Add 2.Display 3.Search 4.Low Stock 5.Total Value 6.Delete 7.Exit");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    Product p = new Product();
+                    p.input(sc);
+                    list.add(p);
+                    break;
+
+                case 2:
+                    for (Product x : list) x.display();
+                    break;
+
+                case 3:
+                    int id = sc.nextInt();
+                    for (Product x : list)
+                        if (x.productId == id) x.display();
+                    break;
+
+                case 4:
+                    for (Product x : list)
+                        if (x.quantity < 5) x.display();
+                    break;
+
+                case 5:
+                    double total = 0;
+                    for (Product x : list)
+                        total += x.price * x.quantity;
+                    System.out.println("Total Value: " + total);
+                    break;
+
+                case 6:
+                    int del = sc.nextInt();
+                    list.removeIf(x -> x.productId == del);
+                    break;
+            }
+        } while (choice != 7);
+    }
+}
