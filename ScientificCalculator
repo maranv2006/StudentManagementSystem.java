@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class ScientificCalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1.Add 2.Sub 3.Mul 4.Div 5.Power 6.Sqrt");
+        int ch = sc.nextInt();
+
+        double a, b;
+
+        switch (ch) {
+            case 1:
+                a = sc.nextDouble(); b = sc.nextDouble();
+                System.out.println(a + b);
+                break;
+
+            case 2:
+                a = sc.nextDouble(); b = sc.nextDouble();
+                System.out.println(a - b);
+                break;
+
+            case 3:
+                a = sc.nextDouble(); b = sc.nextDouble();
+                System.out.println(a * b);
+                break;
+
+            case 4:
+                a = sc.nextDouble(); b = sc.nextDouble();
+                System.out.println(a / b);
+                break;
+
+            case 5:
+                a = sc.nextDouble(); b = sc.nextDouble();
+                System.out.println(Math.pow(a, b));
+                break;
+
+            case 6:
+                a = sc.nextDouble();
+                System.out.println(Math.sqrt(a));
+                break;
+        }
+    }
+}
