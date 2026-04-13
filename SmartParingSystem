@@ -1,0 +1,55 @@
+import java.util.*;
+
+class ParkingSlot {
+    int slotId;
+    String vehicleNo;
+    boolean isOccupied;
+
+    void parkVehicle(Scanner sc) {
+        System.out.print("Enter Slot ID: ");
+        slotId = sc.nextInt(); sc.nextLine();
+
+        System.out.print("Enter Vehicle Number: ");
+        vehicleNo = sc.nextLine();
+
+        isOccupied = true;
+    }
+
+    void display() {
+        System.out.println(slotId + " " + vehicleNo + " " + (isOccupied ? "Occupied" : "Free"));
+    }
+}
+
+public class SmartParkingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<ParkingSlot> list = new ArrayList<>();
+        int choice;
+
+        do {
+            System.out.println("\n1.Park 2.Display 3.Remove 4.Free Slots 5.Exit");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    ParkingSlot p = new ParkingSlot();
+                    p.parkVehicle(sc);
+                    list.add(p);
+                    break;
+
+                case 2:
+                    for (ParkingSlot x : list) x.display();
+                    break;
+
+                case 3:
+                    int id = sc.nextInt();
+                    list.removeIf(x -> x.slotId == id);
+                    break;
+
+                case 4:
+                    System.out.println("Free Slots: " + (100 - list.size()));
+                    break;
+            }
+        } while (choice != 5);
+    }
+}
