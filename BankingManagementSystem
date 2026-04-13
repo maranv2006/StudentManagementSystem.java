@@ -1,0 +1,74 @@
+import java.util.*;
+
+class Account {
+    int accNo;
+    String name;
+    double balance;
+
+    void input(Scanner sc) {
+        System.out.print("Enter Account No: ");
+        accNo = sc.nextInt(); sc.nextLine();
+
+        System.out.print("Enter Name: ");
+        name = sc.nextLine();
+
+        System.out.print("Enter Balance: ");
+        balance = sc.nextDouble();
+    }
+
+    void display() {
+        System.out.println("--------------------------------");
+        System.out.println(accNo+" "+name+" "+balance);
+    }
+}
+
+public class BankingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Account> list = new ArrayList<>();
+        int choice;
+
+        do {
+            System.out.println("\n1.Add 2.Display 3.Deposit 4.Withdraw 5.Search 6.Delete 7.Exit");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    Account a = new Account();
+                    a.input(sc);
+                    list.add(a);
+                    break;
+
+                case 2:
+                    for (Account x : list) x.display();
+                    break;
+
+                case 3:
+                    int dId = sc.nextInt();
+                    double amt = sc.nextDouble();
+                    for (Account x : list)
+                        if (x.accNo == dId) x.balance += amt;
+                    break;
+
+                case 4:
+                    int wId = sc.nextInt();
+                    double wamt = sc.nextDouble();
+                    for (Account x : list)
+                        if (x.accNo == wId && x.balance >= wamt)
+                            x.balance -= wamt;
+                    break;
+
+                case 5:
+                    int id = sc.nextInt();
+                    for (Account x : list)
+                        if (x.accNo == id) x.display();
+                    break;
+
+                case 6:
+                    int del = sc.nextInt();
+                    list.removeIf(x -> x.accNo == del);
+                    break;
+            }
+        } while (choice != 7);
+    }
+}
