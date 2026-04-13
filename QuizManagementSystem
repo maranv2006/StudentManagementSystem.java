@@ -1,0 +1,63 @@
+import java.util.*;
+
+class Question {
+    String question, option1, option2, option3, option4;
+    int answer;
+
+    void input(Scanner sc) {
+        sc.nextLine();
+        System.out.print("Enter Question: ");
+        question = sc.nextLine();
+
+        System.out.print("Option 1: ");
+        option1 = sc.nextLine();
+
+        System.out.print("Option 2: ");
+        option2 = sc.nextLine();
+
+        System.out.print("Option 3: ");
+        option3 = sc.nextLine();
+
+        System.out.print("Option 4: ");
+        option4 = sc.nextLine();
+
+        System.out.print("Correct Answer (1-4): ");
+        answer = sc.nextInt();
+    }
+
+    void display() {
+        System.out.println(question);
+        System.out.println("1."+option1+" 2."+option2+" 3."+option3+" 4."+option4);
+    }
+}
+
+public class QuizSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Question> list = new ArrayList<>();
+        int choice;
+
+        do {
+            System.out.println("\n1.Add Question 2.Take Quiz 3.Exit");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    Question q = new Question();
+                    q.input(sc);
+                    list.add(q);
+                    break;
+
+                case 2:
+                    int score = 0;
+                    for (Question x : list) {
+                        x.display();
+                        int ans = sc.nextInt();
+                        if (ans == x.answer) score++;
+                    }
+                    System.out.println("Score: " + score);
+                    break;
+            }
+        } while (choice != 3);
+    }
+}
